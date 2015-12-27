@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/styles.css">
+<title>Raspberry Relay Shield</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+	<h3>Yo {{.}}</h3>
+	<p id="data">Nimic</p>
+	<div class="relay" id="r1">RELAY 1</div>
+	<div class="relay" id="r2">RELAY 2</div>
+	<div class="relay" id="r3">RELAY 3</div>
+	<div class="relay" id="r4">RELAY 4</div>
+<script type="text/javascript">
+$( document ).ready(function() {
+    console.log( "ready!" );
+    $( ".relay" ).click(function() {
+    	  var elem = $( this );
+    	  console.log( "Handler for .click() called. " + elem.attr( "id" ));
+    	  //ajax
+    	  
+    	  // Using the core $.ajax() method
+			$.ajax({
+ 
+    // The URL for the request
+		    url: "/ajax/post.html",
+ 
+    // The data to send (will be converted to a query string)
+		    data: {
+		        id: elem.attr( "id" ),
+		        //id: 11
+		    },
+		 //   data: { name: "John", location: "Boston" },
+ 
+    // Whether this is a POST or GET request
+ 		   method: "POST",
+ 
+    // The type of data we expect back
+	  //  dataType : "json",
+ 
+    // Code to run if the request succeeds;
+    // the response is passed to the function
+    success: function( data ) {
+    	$( "#data" ).html( "<strong>" + data + "</strong>" );
+        //$( "<h1>" ).text( json.title ).appendTo( "body" );
+        //$( "<div class=\"content\">").html( json.html ).appendTo( "body" );
+        console.log( "Success.");
+    },
+ 
+    // Code to run if the request fails; the raw request and
+    // status codes are passed to the function
+    error: function() {
+        //alert( "Sorry, there was a problem!" );
+        //console.log( "Error: " + errorThrown );
+        //console.log( "Status: " + status );
+        //console.dir( xhr );
+        console.log( "Error.");
+    },
+ 
+    // Code to run regardless of success or failure
+    complete: function() {
+        //alert( "The request is complete!" );
+    	console.log( "Complete.");
+    }
+});
+    	  //ajax
+    	});
+});
+</script>
+</body>
+</html>
