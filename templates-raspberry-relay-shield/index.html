@@ -8,22 +8,61 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 <body>
-	<h3>Yo {{.}}</h3>
+	<!-- <h3>Yo </h3> -->
+	<div class="container"><div class="relay" id="r1">RELAY 1</div></div>
+	<div class="container"><div class="relay" id="r2">RELAY 2</div></div>
+	<div class="container"><div class="relay" id="r3">RELAY 3</div></div>
+	<div class="container"><div class="relay" id="r4">RELAY 4</div></div>
 	<p id="data">Nimic</p>
-	<div class="relay" id="r1">RELAY 1</div>
-	<div class="relay" id="r2">RELAY 2</div>
-	<div class="relay" id="r3">RELAY 3</div>
-	<div class="relay" id="r4">RELAY 4</div>
+	
 	<script type="text/javascript">
-		//On document ready;
+		// On document ready;
 		$(document).ready(function() {
+			// get relays state via ajax call
+			// TODO
+			// Using the core $.ajax() method
+				$.ajax({
+
+					// The URL for the request
+					url : "/ajax/post.html",
+
+					// The data to send (will be converted to a query string)
+					data : {
+						id : 128,
+					},
+
+					// Whether this is a POST or GET request
+					method : "POST",
+
+					// The type of data we expect back
+					//  dataType : "json",
+
+					// Code to run if the request succeeds;
+					// The response is passed to the function
+					success : function(data) {
+						$("#data").html("<strong>" + data + "</strong>");
+						console.log("Success.");
+					},
+
+					// Code to run if the request fails;
+					error : function() {
+						console.log("Error.");
+					},
+
+					// Code to run regardless of success or failure
+					complete : function() {
+						console.log("Complete.");
+					}
+				});
+				// ajax transaction end
+
 			console.log("ready!");
-			//On click on element with class .relay;
+			// On click on element with class .relay;
 			$(".relay").click(function() {
-				//get the element clicked
+				// get the element clicked
 				var elem = $(this);
 				console.log("Handler for .click() called. " + elem.attr("id"));
-				//ajax transaction
+				// Send id of clicked element and get response from server via ajax
 				// Using the core $.ajax() method
 				$.ajax({
 
@@ -42,7 +81,7 @@
 					//  dataType : "json",
 
 					// Code to run if the request succeeds;
-					// the response is passed to the function
+					// The response is passed to the function
 					success : function(data) {
 						$("#data").html("<strong>" + data + "</strong>");
 						console.log("Success.");
@@ -50,6 +89,7 @@
 
 					// Code to run if the request fails;
 					error : function() {
+						$("#data").html("<strong>" + "Comm failed" + "</strong>");
 						console.log("Error.");
 					},
 
@@ -58,7 +98,7 @@
 						console.log("Complete.");
 					}
 				});
-				//ajax transaction end
+				// ajax transaction end
 			});
 		});
 	</script>
