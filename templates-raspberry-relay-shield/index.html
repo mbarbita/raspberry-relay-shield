@@ -18,6 +18,8 @@
 	<script type="text/javascript">
 		// On document ready;
 		$(document).ready(function() {
+			// Autorefresh in case you use multiple connections
+			//setInterval("location.reload();", 5000);
 			// get relays state via ajax call
 			// TODO
 			// Using the core $.ajax() method
@@ -28,7 +30,7 @@
 
 					// The data to send (will be converted to a query string)
 					data : {
-						id : 128,
+						id : "startup",
 					},
 
 					// Whether this is a POST or GET request
@@ -40,8 +42,47 @@
 					// Code to run if the request succeeds;
 					// The response is passed to the function
 					success : function(data) {
-						$("#data").html("<strong>" + data + "</strong>");
+						var res = 0;
+						res = Number(data);
+						$("#data").html("<strong>" + "status: ok, data: " + res + "</strong>");
+						// bit 0 relay 1
+						if ((1 & res)>>0) {
+							$( "#r1" ).addClass("red");
+							$( "#r1" ).removeClass("green");
+						} else {
+							$( "#r1" ).addClass("green");
+							$( "#r1" ).removeClass("red");
+						}
+						
+						// bit 1 relay 2
+						if ((2 & res)>>1) {
+							$( "#r2" ).addClass("red");
+							$( "#r2" ).removeClass("green");
+						} else {
+							$( "#r2" ).addClass("green");
+							$( "#r2" ).removeClass("red");
+						}
+						
+						// bit 2 relay 3
+						if ((4 & res)>>2) {
+							$( "#r3" ).addClass("red");
+							$( "#r3" ).removeClass("green");
+						} else {
+							$( "#r3" ).addClass("green");
+							$( "#r3" ).removeClass("red");
+						}
+						
+						// bit 3 relay 4
+						if ((8 & res)>>3) {
+							$( "#r4" ).addClass("red");
+							$( "#r4" ).removeClass("green");
+						} else {
+							$( "#r4" ).addClass("green");
+							$( "#r4" ).removeClass("red");
+						}
+
 						console.log("Success.");
+						console.log("Res: "+res);
 					},
 
 					// Code to run if the request fails;
@@ -83,7 +124,46 @@
 					// Code to run if the request succeeds;
 					// The response is passed to the function
 					success : function(data) {
-						$("#data").html("<strong>" + data + "</strong>");
+						var res = 0;
+						res = Number(data);
+						//$("#data").html("<strong>" + "status ok: " + res + "</strong>");
+						// bit 0 relay 1
+						if ((1 & res)>>0) {
+							$( "#r1" ).addClass("red");
+							$( "#r1" ).removeClass("green");
+						} else {
+							$( "#r1" ).addClass("green");
+							$( "#r1" ).removeClass("red");
+						}
+						
+						// bit 1 relay 2
+						if ((2 & res)>>1) {
+							$( "#r2" ).addClass("red");
+							$( "#r2" ).removeClass("green");
+						} else {
+							$( "#r2" ).addClass("green");
+							$( "#r2" ).removeClass("red");
+						}
+						
+						// bit 2 relay 3
+						if ((4 & res)>>2) {
+							$( "#r3" ).addClass("red");
+							$( "#r3" ).removeClass("green");
+						} else {
+							$( "#r3" ).addClass("green");
+							$( "#r3" ).removeClass("red");
+						}
+						
+						// bit 3 relay 4
+						if ((8 & res)>>3) {
+							$( "#r4" ).addClass("red");
+							$( "#r4" ).removeClass("green");
+						} else {
+							$( "#r4" ).addClass("green");
+							$( "#r4" ).removeClass("red");
+						}
+
+						$("#data").html("<strong>" + "status: ok, data: " + res + "</strong>");
 						console.log("Success.");
 					},
 

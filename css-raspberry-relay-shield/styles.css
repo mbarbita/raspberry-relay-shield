@@ -19,5 +19,13 @@
 #data {
 	margin-left: 1em;
 	width: 10em;
-	background-color: lime;
+	background-color: aqua;
+}
+
+.red {
+	background-color: red;
+}
+
+.green {
+	background-color: green;
 }
