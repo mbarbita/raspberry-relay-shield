@@ -6,6 +6,9 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
+	"os/exec"
+	"strconv"
 	//"github.com/davecheney/i2c"
 )
 
@@ -128,7 +131,19 @@ func main() {
 				} else {
 					rs = setBit(rs, 3)
 				}
+			default:
+				log.Fatal()
 			}
+			// python call
+			//cmd := "cmd"
+			cmd:="python relay.py"
+			//args := []string{"/K","echo","relay.py", string(rs)}
+			args := []string{strconv.Itoa(rs)}
+			if err := exec.Command(cmd, args...).Run(); err != nil {
+				fmt.Fprintln(os.Stderr, err)
+				os.Exit(1)
+			}
+			fmt.Println("Successfully exec python", strconv.Itoa(rs))
 			chb <- rs
 			log.Printf("bitwise: %b", rs)
 		}

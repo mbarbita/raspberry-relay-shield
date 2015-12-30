@@ -87,6 +87,7 @@
 
 					// Code to run if the request fails;
 					error : function() {
+						$("#data").html("<strong>" + "Comm failed!" + "</strong>");
 						console.log("Error.");
 					},
 
@@ -169,7 +170,7 @@
 
 					// Code to run if the request fails;
 					error : function() {
-						$("#data").html("<strong>" + "Comm failed" + "</strong>");
+						$("#data").html("<strong>" + "Comm failed!" + "</strong>");
 						console.log("Error.");
 					},
 
