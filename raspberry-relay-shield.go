@@ -96,6 +96,22 @@ func hasBit(n int, pos uint) bool {
 	return (val > 0)
 }
 
+func execPython(arg int) {
+	var cmdOut []byte
+	var err error
+	cmd := "python"
+	//args := []string{"/K","echo","relay.py", string(rs)}
+	args := []string{"relay.py", strconv.Itoa(arg)}
+	if cmdOut, err = exec.Command(cmd, args...).Output(); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+	pyret := string(cmdOut)
+	log.Println("Python script response:", pyret)
+	log.Println("Successfully exec python", strconv.Itoa(rs))
+
+}
+
 var cha = make(chan int)
 var chb = make(chan int)
 
@@ -103,6 +119,7 @@ func main() {
 
 	go func() {
 		rs := 0
+		execPython(rs)
 		for {
 			msga := <-cha
 			switch msga {
@@ -135,15 +152,20 @@ func main() {
 				log.Fatal()
 			}
 			// python call
+			execPython(rs)
 			//cmd := "cmd"
-			cmd:="python relay.py"
-			//args := []string{"/K","echo","relay.py", string(rs)}
-			args := []string{strconv.Itoa(rs)}
-			if err := exec.Command(cmd, args...).Run(); err != nil {
-				fmt.Fprintln(os.Stderr, err)
-				os.Exit(1)
-			}
-			fmt.Println("Successfully exec python", strconv.Itoa(rs))
+			//			var cmdOut []byte
+			//			var err error
+			//			cmd:="python"
+			//			//args := []string{"/K","echo","relay.py", string(rs)}
+			//			args := []string{"relay.py",strconv.Itoa(rs)}
+			//			if cmdOut, err = exec.Command(cmd, args...).Output(); err != nil {
+			//				fmt.Fprintln(os.Stderr, err)
+			//				os.Exit(1)
+			//			}
+			//			pyret := string(cmdOut)
+			//			log.Println("Python script response:", pyret)
+			//			log.Println("Successfully exec python", strconv.Itoa(rs))
 			chb <- rs
 			log.Printf("bitwise: %b", rs)
 		}
