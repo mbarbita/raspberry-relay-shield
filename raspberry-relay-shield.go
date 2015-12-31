@@ -9,7 +9,6 @@ import (
 	"os"
 	"os/exec"
 	"strconv"
-	//"github.com/davecheney/i2c"
 )
 
 // Default Request Handler
@@ -36,17 +35,6 @@ func post(w http.ResponseWriter, r *http.Request) {
 		msg = r.Form.Get("id")
 		log.Println("form:", msg)
 	}
-	//	if r.Method == "POST" {
-	//		body, _ := ioutil.ReadAll(r.Body)
-	//		log.Println("body", string(body))
-	//		log.Println("body", body)
-	//		msg = string(body[3:])
-	//	}
-	//	if r.Method == "GET" {
-	//		r.ParseForm()
-	//		msg = r.Form.Get("id")
-	//		log.Println("form:", msg)
-	//	}
 	log.Println("method:", r.Method)
 	log.Println("msg", msg)
 
@@ -70,12 +58,11 @@ func post(w http.ResponseWriter, r *http.Request) {
 	default:
 		fmt.Fprintf(w, "%s", "invalid req")
 	}
-	//		fmt.Fprintf(w, "clicked %s!", msg)
-
 }
 
 func raspberry() {
 	//i, err := i2c.New(0x20, 1)
+	//TODO
 }
 
 // Sets the bit at pos in the integer n.
@@ -109,7 +96,6 @@ func execPython(arg int) {
 	pyret := string(cmdOut)
 	log.Println("Python script response:", pyret)
 	log.Println("Successfully exec python", strconv.Itoa(arg))
-
 }
 
 var cha = make(chan int)
@@ -153,19 +139,6 @@ func main() {
 			}
 			// python call
 			execPython(rs)
-			//cmd := "cmd"
-			//			var cmdOut []byte
-			//			var err error
-			//			cmd:="python"
-			//			//args := []string{"/K","echo","relay.py", string(rs)}
-			//			args := []string{"relay.py",strconv.Itoa(rs)}
-			//			if cmdOut, err = exec.Command(cmd, args...).Output(); err != nil {
-			//				fmt.Fprintln(os.Stderr, err)
-			//				os.Exit(1)
-			//			}
-			//			pyret := string(cmdOut)
-			//			log.Println("Python script response:", pyret)
-			//			log.Println("Successfully exec python", strconv.Itoa(rs))
 			chb <- rs
 			log.Printf("bitwise: %b", rs)
 		}
