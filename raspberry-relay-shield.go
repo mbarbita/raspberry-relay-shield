@@ -108,7 +108,7 @@ func execPython(arg int) {
 	}
 	pyret := string(cmdOut)
 	log.Println("Python script response:", pyret)
-	log.Println("Successfully exec python", strconv.Itoa(rs))
+	log.Println("Successfully exec python", strconv.Itoa(arg))
 
 }
 
