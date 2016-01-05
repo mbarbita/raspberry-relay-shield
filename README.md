@@ -1,7 +1,7 @@
 # raspberry-relay-shield
 
-A little golang, python client-server app for:
-http://www.robofun.ro/raspberry-pi-si-componente/placa-releu-raspberry-pi
+A little golang, python client-server app for:\n
+http://www.robofun.ro/raspberry-pi-si-componente/placa-releu-raspberry-pi/n
 http://www.seeedstudio.com/wiki/Raspberry_Pi_Relay_Board_v1.0
 
 sudo apt-get update
