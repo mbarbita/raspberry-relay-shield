@@ -6,6 +6,7 @@ http://www.robofun.ro/raspberry-pi-si-componente/placa-releu-raspberry-pi
 
 http://www.seeedstudio.com/wiki/Raspberry_Pi_Relay_Board_v1.0
 
+#Install:
 sudo apt-get update
 
 sudo apt-get -y install git python-smbus
@@ -16,6 +17,6 @@ cd raspberry-relay-shield
 
 ./raspberry-relay-shield
 
-Point your browser to:
+#Point your browser to:
 
 http://[raspberry pi IP]:8080
