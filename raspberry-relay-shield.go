@@ -14,7 +14,7 @@ import (
 // Default Request Handler
 func defaultHandler(w http.ResponseWriter, r *http.Request) {
 	// Read in the template.
-	t, err := template.ParseFiles("templates-raspberry-relay-shield/index.html")
+	t, err := template.ParseFiles("html-templates/index.html")
 	if err != nil {
 		log.Fatal("WTF dude, error parsing your template.")
 	}
@@ -143,7 +143,7 @@ func main() {
 			log.Printf("bitwise: %b", rs)
 		}
 	}()
-	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css-raspberry-relay-shield"))))
+	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
 	http.HandleFunc("/ajax/post.html", post)
 	http.HandleFunc("/", defaultHandler)
 	http.ListenAndServe(":8080", nil)
